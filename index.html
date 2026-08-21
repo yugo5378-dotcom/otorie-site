@@ -32,6 +32,9 @@ function installLinks(){
       .course-organ{left:26.7%;top:58.0%;width:21.0%;height:11.8%;border-radius:22px}
       .course-voice{left:49.0%;top:58.0%;width:21.0%;height:11.8%;border-radius:22px}
       .course-tsumiki{left:71.7%;top:58.0%;width:21.0%;height:11.8%;border-radius:22px}
+      .course-more{position:absolute;left:50%;bottom:5%;transform:translateX(-50%);display:inline-flex;align-items:center;gap:.35em;padding:.42em .82em;border-radius:999px;background:rgba(255,255,255,.96);border:1px solid rgba(196,151,119,.58);box-shadow:0 3px 10px rgba(76,55,38,.10);font-size:clamp(9px,1.45vw,14px);font-weight:800;letter-spacing:.08em;color:#765748;white-space:nowrap}
+      .course-more:after{content:'›';font-size:1.18em;line-height:1;color:#d87e68}
+      @media(max-width:520px){.course-more{font-size:10px;padding:.35em .68em;bottom:3%}}
     `;
     d.head.appendChild(st);
     const main=d.querySelector('.site');
@@ -40,19 +43,20 @@ function installLinks(){
       const a=d.createElement('a');
       a.className='hit '+cls;
       a.href=href;
+      a.target='_top';
       a.setAttribute('aria-label',label);
-      const s=d.createElement('span');
-      s.className='sr';
-      s.textContent=label;
-      a.appendChild(s);
+      const more=d.createElement('span');
+      more.className='course-more';
+      more.textContent='MORE';
+      a.appendChild(more);
       main.appendChild(a);
     };
-    add('course-piano','music/','ピアノコースの詳しいご案内');
-    add('course-organ','music/','オルガンコースの詳しいご案内');
-    add('course-voice','voice/','ボイストレーニングの詳しいご案内');
-    add('course-tsumiki','tsumiki/','積木ワークショップの詳しいご案内');
+    add('course-piano','music/index.html','ピアノコースを詳しく見る');
+    add('course-organ','music/index.html','オルガンコースを詳しく見る');
+    add('course-voice','voice/index.html','ボイストレーニングを詳しく見る');
+    add('course-tsumiki','tsumiki/index.html','積木ワークショップを詳しく見る');
     const blocks=d.querySelector('.blocks-detail');
-    if(blocks){blocks.href='tsumiki/';blocks.setAttribute('aria-label','積木ワークショップの詳しいご案内')}
+    if(blocks){blocks.href='tsumiki/index.html';blocks.target='_top';blocks.setAttribute('aria-label','積木ワークショップを詳しく見る')}
     const resize=()=>{frame.style.height=d.documentElement.scrollHeight+'px'};
     resize();
     if(window.ResizeObserver)new ResizeObserver(resize).observe(d.documentElement);
